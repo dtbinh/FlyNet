@@ -1,0 +1,10 @@
+dt = .1;
+numFrames = 1000;
+poseData = Test.Utils.generate_pose_data('square',dt,numFrames);
+
+
+gainStruct = struct();
+gainStruct.Kp_position = 1;
+gainStruct.Ki_position = 
+controller = ControllerExample(gainSruct);
+
