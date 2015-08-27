@@ -5,10 +5,10 @@ classdef ControllerExample < handle
         Kd_position
     end
     methods
-        function [obj] = ControllerExample(gainStruct)
-            obj.Kp_position = gainStruct.Kp_position;
-            obj.Ki_position = gainStruct.Ki_position;
-            obj.Kd_position = gainStruct.Kd_position;
+        function [obj] = ControllerExample()
+            obj.Kp_position = Test.Config.Controller.Kp_position;
+            obj.Ki_position = Test.Config.Controller.Ki_position;
+            obj.Kd_position = Test.Config.Controller.Kd_position;
         end
         
         function [velocityDes] = calc_desired_velocity(obj,position)

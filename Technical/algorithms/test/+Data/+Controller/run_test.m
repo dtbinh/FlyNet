@@ -2,13 +2,7 @@ dt = .1;
 numFrames = 1000;
 poseData = Test.Utils.generate_pose_data('square',dt,numFrames);
 
-
-gainStruct = struct();
-gainStruct.Kp_position = 1;
-gainStruct.Ki_position = 1;
-gainStruct.Kd_position = 1;
-
-controller = Data.Controller.ControllerExample(gainStruct);
+controller = Data.Controller.ControllerExample();
 
 % Your goal is to create your own version of the file ControllerExample
 % that actually calculates desired velocities (the current one that I made
