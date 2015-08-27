@@ -11,9 +11,10 @@ classdef ControllerExample < handle
             obj.Kd_position = gainStruct.Kd_position;
         end
         
-        function [velocityDes] = calc_desired_velocity(position)
+        function [velocityDes] = calc_desired_velocity(obj,position)
             velocityDes = struct();
-            
+            velocityDes.x = 0;
+            velocityDes.y = 0;
         end
     end 
 end
