@@ -11,7 +11,7 @@ classdef ControllerExample < handle
             obj.Kd_position = Test.Config.Controller.Kd_position;
         end
         
-        function [velocityDes] = calc_desired_velocity(obj,position)
+        function [velocityDes] = calc_desired_velocity(obj,position,desiredPosition)
             velocityDes = struct();
             velocityDes.x = 0;
             velocityDes.y = 0;

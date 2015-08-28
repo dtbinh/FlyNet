@@ -1,8 +1,10 @@
 dt = .1;
 numFrames = 1000;
-poseData = Test.Utils.generate_pose_data('square',dt,numFrames);
+noiseStruct = struct();
+noiseStruct.position = .01;
+poseData = Test.Utils.generate_pose_meas_data('square',dt,numFrames,noiseStruct);
 
-controller = Data.Controller.ControllerExample();
+estimator = ToyProblems.Estimator.EstimatorExample();
 
 % Your goal is to create your own version of the file ControllerExample
 % that actually calculates desired velocities (the current one that I made
@@ -15,22 +17,22 @@ controller = Data.Controller.ControllerExample();
 % anything you see fit to get the controller to work. Once you get it to
 % work, feel free to tune the controller.
 
-desiredVelocity = struct();
-desiredVelocity.x = [];
-desiredVelocity.y = [];
+estimatedVelocity = struct();
+estimatedVelocity.x = [];
+estimatedVelocity.y = [];
 for frameIdx = 1:numel(poseData.time)
     pose = struct();
     pose.x = poseData.x(frameIdx);
     pose.y = poseData.y(frameIdx);
     pose.time = poseData.time(frameIdx);
-    velDesCalc = controller.calc_desired_velocity(pose);
-    desiredVelocity.x(frameIdx) = velDesCalc.x;
-    desiredVelocity.y(frameIdx) = velDesCalc.y;
+    velEst = estimator.calc_estimated_velocity(pose);
+    estimatedVelocity.x(frameIdx) = velEst.x;
+    estimatedVelocity.y(frameIdx) = velEst.y;
 end
 
-plot(poseData.time,desiredVelocity.x),hold on
-plot(poseData.time,desiredVelocity.y)
+plot(poseData.time,estimatedVelocity.x),hold on
+plot(poseData.time,estimatedVelocity.y)
 grid on
 xlabel('Time (s)','FontSize',12)
-ylabel('Desired Velocity (m/s)','FontSize',12)
+ylabel('Estimated Velocity (m/s)','FontSize',12)
 legend('X velocity','Y velocity')

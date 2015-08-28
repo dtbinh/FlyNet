@@ -2,13 +2,7 @@ dt = .1;
 numFrames = 1000;
 poseData = Test.Utils.generate_pose_data('square',dt,numFrames);
 
-
-gainStruct = struct();
-gainStruct.Kp_position = 1;
-gainStruct.Ki_position = 1;
-gainStruct.Kd_position = 1;
-
-controller = Data.Controller.ControllerExample(gainStruct);
+controller = ToyProblems.Controller.ControllerExample();
 
 % Your goal is to create your own version of the file ControllerExample
 % that actually calculates desired velocities (the current one that I made
@@ -24,19 +18,21 @@ controller = Data.Controller.ControllerExample(gainStruct);
 desiredVelocity = struct();
 desiredVelocity.x = [];
 desiredVelocity.y = [];
+desiredPosition.x = 0;
+desiredPosition.y = 0;
 for frameIdx = 1:numel(poseData.time)
     pose = struct();
     pose.x = poseData.x(frameIdx);
     pose.y = poseData.y(frameIdx);
     pose.time = poseData.time(frameIdx);
-    velDesCalc = controller.calc_desired_velocity(pose);
+    velDesCalc = controller.calc_desired_velocity(pose,desiredPosition);
     desiredVelocity.x(frameIdx) = velDesCalc.x;
     desiredVelocity.y(frameIdx) = velDesCalc.y;
 end
 
-plot(pose.time,desiredVelocity.x),hold on
-plot(pose.time,desiredVelocity.y)
+plot(poseData.time,desiredVelocity.x),hold on
+plot(poseData.time,desiredVelocity.y)
 grid on
 xlabel('Time (s)','FontSize',12)
 ylabel('Desired Velocity (m/s)','FontSize',12)
-legend('X velocity','
+legend('X velocity','Y velocity')
