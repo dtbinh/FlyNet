@@ -1,10 +1,10 @@
 dt = .1;
 numFrames = 1000;
 noiseStruct = struct();
-noiseStruct.position = .01;
+noiseStruct.position = .1;
 poseData = Test.Utils.generate_pose_meas_data('square',dt,numFrames,noiseStruct);
 
-estimator = ToyProblems.Estimator.EstimatorExample();
+estimator = ToyProblems.Estimator.EstimatorEllison();
 
 % Your goal is to create your own version of the file EstimatorExample
 % that actually calculates estimated velocities (the current one that I made
@@ -28,10 +28,20 @@ for frameIdx = 1:numel(poseData.time)
     estimatedVelocity.x(frameIdx) = velEst.x;
     estimatedVelocity.y(frameIdx) = velEst.y;
 end
+figure
+plot(poseData.time,poseData.x),hold on
+plot(poseData.time,poseData.y)
+grid on
+xlabel('Time (s)','FontSize',12)
+ylabel('Position (m)','FontSize',12)
+legend('X Position','Y Position')
 
+figure
 plot(poseData.time,estimatedVelocity.x),hold on
 plot(poseData.time,estimatedVelocity.y)
 grid on
 xlabel('Time (s)','FontSize',12)
 ylabel('Estimated Velocity (m/s)','FontSize',12)
 legend('X velocity','Y velocity')
+
+

@@ -2,7 +2,7 @@ dt = .1;
 numFrames = 1000;
 poseData = Test.Utils.generate_pose_data('square',dt,numFrames);
 
-controller = ToyProblems.Controller.ControllerEllison();
+controller = ToyProblems.Controller.ControllerEllis();
 
 % Your goal is to create your own version of the file ControllerExample
 % that actually calculates desired velocities (the current one that I made
