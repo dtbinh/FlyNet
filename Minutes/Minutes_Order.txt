@@ -1,0 +1,11 @@
+Order of Minute Taking as Calculated from Python Script:
+
+Taylor
+Austin
+Drew 
+Matt
+Tyler
+Prashant
+Steve
+Bryce
+
