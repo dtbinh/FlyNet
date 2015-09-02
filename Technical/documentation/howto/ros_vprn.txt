@@ -1,0 +1,17 @@
+This howto will make a VPRN (Virtual Reality Peripheral Network) client for ROS available to publish Vicon poses to the ROS core.
+
+If you already have a catkin workspace, skip to step 3
+
+The git page for the VRPN client has some additional info, but the test line below will work for our system. The key part about the VRPN client is that you need to know what object you want to track ahead of execution. This object name is defined in the Vicon software. The IP address below corresponds to the Windows machine running the Vicon tracker. While the VRPN protocol is system-agnostic, I have not tested this client on Mac. YMMV.
+
+
+1. Create folder catkin_ws
+2. Inside folder, create src
+3. Inside src, execute:
+git clone https://github.com/damanfb/ros_vrpn_client.git
+
+4. cd ros_vrpn_client
+5. unzip vrpn_07_28.zip
+6. From catkin_ws: execute catkin_make
+7. source devel/setup.bash
+8. rosrun ros_vrpn_client ros_vrpn_client _name:=defined_name _vrpn_server_ip:=192.168.20.1
