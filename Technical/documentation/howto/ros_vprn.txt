@@ -14,4 +14,4 @@ git clone https://github.com/damanfb/ros_vrpn_client.git
 5. unzip vrpn_07_28.zip
 6. From catkin_ws: execute catkin_make
 7. source devel/setup.bash
-8. rosrun ros_vrpn_client ros_vrpn_client _name:=defined_name _vrpn_server_ip:=192.168.20.1
+8. rosrun ros_vrpn_client ros_vrpn_client __name:=defined_name _vrpn_server_ip:=192.168.20.100
