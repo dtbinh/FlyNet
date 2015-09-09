@@ -1,0 +1,26 @@
+classdef QuadrotorUKF < handle
+    properties
+        phi
+        theta
+        yaw
+        velx_body
+        vely_body
+        velz_body
+        velx_level
+        vely_level
+        velz_level
+        x_inertial
+        y_inertial
+        z_inertial
+        T % Thrust
+        
+    end
+    methods
+        function [obj] = QuadrotorUKF()
+            
+        end
+        function prop_time(obj)
+            
+        end
+    end
+end
