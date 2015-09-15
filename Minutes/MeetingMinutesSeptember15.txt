@@ -1,0 +1,73 @@
+Meeting Notes:
+
+Steve Lit Review:
+4 SLAM options to look into
+R tab
+DVO 
+RGBD
+LSD SLAM
+
+Need to figure out how SLAM data can be shared between quads
+Sharing maps?
+Tough to transmit and combine data
+All methods create octomaps
+
+Bryce Lit Review:
+Planning on using the Pixhawk firmware currently
+
+Prashant Lit Review:
+Swarm flight
+
+Looking into different autopilots:
+Pixhawk- Seems like the best option, better hardware than APM
+Picolo Nano- Restricted usage, expensive($2K)
+APM- 
+
+Drew Lit Review:
+State Estimators
+BYU paper
+Use accelerometers to get velocity based on drag forces
+Kalman filter with integrating visual odometry
+
+Ed Lit Review:
+Simulation tools (Simulink)
+Physical mock up of quad is built to pull moment of inertias
+
+Austin Lit Review:
+(Over Achiever, made powerpoint, making us look bad)
+Sensors for SLAM
+Ultrasonic- cheap, light, De-conflict with TDMA
+Lidar- Fixed or Spinning. Heavy and expensive. Planar scans
+Radio Frequency- lightweight and low cost. COTs not necassarily available. fixed anchors
+Monocular Vision- Cheap and Low processing. Good for hallways. Requires assumptions of environment
+Stereo Vision- Low SWaP and cheap. Fast flight is possible. Used a lot for SLAM. Poor in low light conditions
+RGBD- Works in low light. Suffers from blurring. Low SWaP. Lower processing. Good paper with details.
+
+Gaussian-Pyramid Filtering for blur reduction.
+Key Frames to help with mapping computation
+
+Flight Speed- 
+MIT hit 10 m/s iwth fixed wing indoor
+MIT 8 m/s with quad but map was fully known
+Stereo Group got 4 m/s
+
+Novel Ideas?
+-GPU/FPGA Acceleration for Vision/RGBD
+-Improved RGBD to mitigate multi-sensor interference (Real-sense)
+-Quad/UGV teaming for improved endurance
+	it has been done somewhat
+-V2V Localization
+	distributed/mobile anchors
+	not sure...
+
+Issues with fast flight
+-SLAM hasn't been used for fast flight
+-Lighting conditions will be an issue
+
+
+Requirements Overview
+How good does the map need to be?
+(See Updated Requirements List)
+
+Everyone Read project charter tonight and give feedback
+
