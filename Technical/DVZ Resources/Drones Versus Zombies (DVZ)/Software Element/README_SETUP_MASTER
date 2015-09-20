@@ -1,0 +1,21 @@
+Basic Instrutions:
+
+On Cerebro in a terminal run:
+>>roscore
+
+ssh into wolverine (password is odroid):
+>> wolverine
+
+Now run whatever package your heart desires (in correct terminal for where hardware is connected)...
+ex: >> px4flow_launch
+
+More Advanced Instructions:
+
+Some aliases have been set up on cerebro to make the commands simpler...
+Here are the actual commands...
+
+enable_cerebro = export ROS_MASTER_URI=http://engr2-0-12-fixed:11311
+
+wolverine = ssh odroid@engr2-0-10-fixed
+
+

@@ -1,0 +1,40 @@
+Each step needs to run in a new terminal/tab
+
+Begin ROS
+1. roscore
+
+RVIZ
+2. rviz
+
+Map Server
+3. rosrun map_server map_server mymap.yaml
+
+Add map to RVIZ (in RVIZ)
+	Add
+	By Topic
+	/map
+
+Initial Pose
+4. In RVIZ -> 2-D Pose Estimate (at top) (click & drag)
+	Publishes /initialpose
+
+5. Run steps 6-8 on wolverine: ssh odroid@wolverine, password odroid, alias:wolverine
+Every other step is run on the Cerebro/ground computer
+
+####PX4Flow (ACM 0)
+####6. roslaunch px4flow px4flow.launch #alias: px4flow_launch
+
+Roscopter (ACM 1)
+7. rosrun roscopter roscopter_node.py --device=/dev/pixhawk --baudrate=115200 #alias: pixhawk_launch
+
+Hokuyo Node (ACM 2)
+8. roslaunch hokuyo_node dvz_hokuyo.launch #alias: hokuyo_launch
+
+
+Odometry - Run on cerebro (currently)
+####9. roscd odometry/scripts
+####10. ./pub_odom.py
+9. roslaunch laser_scan_matcher dvz_scanmatcher.launch
+
+AMCL - Run on wolverine
+10. roslaunch amcl dvz_amcl_test.launch

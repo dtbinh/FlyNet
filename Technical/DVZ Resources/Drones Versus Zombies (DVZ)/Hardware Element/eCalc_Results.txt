@@ -1,0 +1,29 @@
+eCalc Data:
+Link for eCalc Help: http://www.ecalc.ch/calcinclude/help/xcoptercalchelp.htm
+
+TEST 1:
+Notes: 
+	!!Update weight to be more accurate for A/C Empty weight (w/o Payload)!!
+	Test is for A/C without payload
+	Test results are more optimistic than actual because eCalc model does not account for co-axial motor configuration
+Total Weight: 2340
+Battery: 8400 mAh Traxxas Battery 
+	charge state: normal
+	!!note: battery resistance modeled is unknown!!
+Controller: Custom 20A 
+Motor: APC A2830-12 (850kv)
+Propeller: APC Electric-E, 10x4.7
+Link: http://www.ecalc.ch/xcoptercalc.php?ecalc&lang=en&cooling=2.5&rotornumber=8&config=1&weight=2340&calc=auw&elevation=1646&airtemp=22&qnh=1013&batteries=0&battcap=4200&battri=0.0053&battv=3.7&battccont=25&battcmax=35&battweight=105&chargestate=0&s=3&p=2&esc=0&esccont=20&escmax=25&escri=0.01&escweight=21&motor=rctimer&type=54|a2830-12&gear=1&propeller=apc_electric_e&diameter=10&pitch=4.7&blades=2
+RESULTS 1:
+Mixed Flight Time: 12.3 min
+Payload Capacity: 648 g 
+
+TEST 2:
+Notes: 
+	!!Update weight to be more accurate for A/C Empty weight (w/o Payload)!!
+	Test is same as Test 1 but with 500g payload included in total weight.
+Total Weight: 2840
+Link: http://www.ecalc.ch/xcoptercalc.php?ecalc&lang=en&cooling=2.5&rotornumber=8&config=1&weight=2840&calc=auw&elevation=1646&airtemp=22&qnh=1013&batteries=0&battcap=4200&battri=0.0053&battv=3.7&battccont=25&battcmax=35&battweight=105&chargestate=0&s=3&p=2&esc=0&esccont=20&escmax=25&escri=0.01&escweight=21&motor=rctimer&type=54|a2830-12&gear=1&propeller=apc_electric_e&diameter=10&pitch=4.7&blades=2
+RESULTS 2:
+Mixed Flight Time: 10 min
+Payload Capacity: 148 g 
