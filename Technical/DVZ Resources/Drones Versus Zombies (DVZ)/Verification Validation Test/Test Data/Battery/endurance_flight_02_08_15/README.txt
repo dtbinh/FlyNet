@@ -1,0 +1,2 @@
+test1: Flight battery with hokuyo on, px4flow mock mass on, only running altitude controller with feedback from vicon - test ended early because it looked like vicon lost tracking
+test2: Flight battery with hokuyo on, px4flow mock mass on, only running altitude controller with feedback from vicon
