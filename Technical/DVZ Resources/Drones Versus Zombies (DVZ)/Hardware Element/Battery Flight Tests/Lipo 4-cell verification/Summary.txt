@@ -1,0 +1,9 @@
+% Summary of test:
+
+This test was done to verify that 4S Lipo batteries are able to be used on the 2013 X8. 
+
+The matlab program plots data from a test flight using a 4S battery to ensure that maximum allowable power for motors and esc's was not exceeded.
+Prior to this test 4S Lipo batteries were thought to possibly be the cause of earlier ESC and Motor failures.
+The quad was flown manually and flown more harshly than normal autonomous operation expectations.
+The results show that the 2013 X8 is compatible with 4S Lipo batteries. Since this test, 4S batteries have 
+been used on the X8 regularly and cause no problems.

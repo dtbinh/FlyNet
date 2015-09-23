@@ -1,0 +1,2 @@
+aliencopter bee:
+http://www.ecalc.ch/xcoptercalc.php?ecalc&lang=en&cooling=medium&rotornumber=4&config=flat&weight=100&calc=sum&elevation=0&airtemp=21&qnh=1013&batteries=0&battcap=4200&battri=0.005&battv=3.7&battccont=20&battcmax=30&battweight=109&chargestate=0&s=4&p=1&esc=0&esccont=20&escmax=30&escri=0.01&escweight=43&motor=0&type=0&motorkv=960&motorio=0.75&motorvio=10&motorlimit=250&motorlimittype=w&motorri=0.098&motorlength=23&motorpoles=14&motorweight=60&gear=1&propeller=0&propconst=1.2&proptwist=0&diameter=9.4&pitch=5&blades=2
