@@ -1,0 +1,22 @@
+Action Plan
+
+Sunday, September 13, 2015
+4:03 PM
+
+Week 1: 9/15
+	- Control Architecture - Bryce/Ed
+	- Other autopilots - Prashant
+
+Week 2: 9/23
+	- Pixhawk Control Model - Prashant
+	- Position interface Pixhawk - Bryce
+		- HIL Sim
+		- ROS
+	- Off board computer use - Matt
+		- ROS
+		- DVZ documentation
+	- Model development - ED
+
+Week 3-5: Oct 21
+	- VICON
+	- Flight testing
