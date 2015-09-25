@@ -1,0 +1,26 @@
+Discuss requirements/push backs in tomorrow's meeting (9/23/15) 
+-Elimination/reduction of the 1lb payload requirement
+-Operation in only normal/bright lighting conditions
+-Object ID: Humans only
+-Flight speed goal: 5 m/s
+-Prioritization of the following: Map quality, flight speed, ID accuracy, flight endurance, autonomous teamwork 
+-Should this be a multi-year effort?
+Should have requirements finalized by Friday (9/25/15).
+
+Start testing the SLAM in vicon space
+Software in loop to be setup (ROS PX4 software in loop)
+
+Controls
+
+-Controls team- Block diagrams for presentation
+-Useful to add bandwidth to the control model
+-Model of Pixhawk controller
+-Update Prof. Frew on controls team's status
+-Dead reckoning to reinitialize SLAM.
+
+SLAM Demos
+
+Steve's Demo:
+RTAB 
+CCNY 
+IMU sensor fusion
