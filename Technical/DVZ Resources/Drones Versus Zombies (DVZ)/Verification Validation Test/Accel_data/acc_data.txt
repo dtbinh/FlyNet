@@ -1,1 +1,0 @@
-%Time, acc_x_bias, acc_y_bias, acc_z_bias, acc_x_body_biased, acc_y_body_biased, acc_z_body_biased
