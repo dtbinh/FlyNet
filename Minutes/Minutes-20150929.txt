@@ -1,0 +1,46 @@
+Start late due to Drew being late
+Option for VizO / base / autopilot: DJI Guidance solution on Matrice 100
+Does not give us lighting condition option
+Provides an out-of-the box solution for VizO
+
+Discussed with Frew, not with Zohaib - 
+Big tradeoff - no function in low light
+
+Options: 
+Matrice base w/ Guidance
+Other base w/ Guidance
+
+Guidance already has ROS integration - limits with imaging output
+
+Discussed relative merits of the Matrice vs a smaller platform
+Matrice will be cutting it close to get through doors
+Comparison of the trade space between custom vs Matrice platforms
+Matrice represents a large chunk of budget
+
+Contact with Zohaib this week is via email or call by Drew and Austin
+Requirements / preferences to be email to Zohaib today
+
+Flight team debrief on H-frame mishap; blame assigned to poor design of prop guards with mechanical interference. Operational adjustments: Remove plastic blade guards, replace with more durable solution.
+
+Flight team: Airtime based on weight
+Controls: Analysis of public info on the DJI controller
+
+FlyNet invited to RECUV social event on 2 Oct
+
+Directions for Control:
+Pursue Pixhawk development / analysis
+Integrate with Vicon to be able to give Pixhawk Vicon-coordinate waypoints
+
+Integration challenges:
+Target identification
+Path planning
+Multi-robot coordination
+ 
+
+Prashant: doing hardware checkout of ultrasound, lidar, and teensy board
+Will complete second round of hardware purchasing
+
+
+
+
+

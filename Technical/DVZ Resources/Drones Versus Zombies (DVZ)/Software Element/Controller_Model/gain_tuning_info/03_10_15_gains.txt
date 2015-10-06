@@ -1,2 +1,0 @@
-%Pr_phi, Ir_phi, Dr_phi, Pr_theta, Ir_theta, Dr_theta, Pa_phi, Pa_theta, Pvx, Ivx, Dvx, Pvy, Ivy, Dvy, Px, Ix, Dx, Py, Iy, Dy
-20 ,-0.5 ,12 ,20 ,-0.5 ,12 ,10 ,10 ,-0.26 ,-0.05 ,0 ,0.25 ,0.05 ,0 ,0.6 ,0 ,0 ,0.5 ,0 ,0

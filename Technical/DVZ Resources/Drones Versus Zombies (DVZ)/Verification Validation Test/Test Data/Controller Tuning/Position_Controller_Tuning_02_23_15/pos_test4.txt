@@ -1,2 +1,0 @@
-%Time, velx_inertial_send, Px, Ix, vely_inertial_send, Py, Iy, x, y, z, phi, theta, psi, target_x, target_y
-14247426

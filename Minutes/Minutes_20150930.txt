@@ -1,0 +1,33 @@
+Status:
+	-Drew 
+		-Ordering (odroid cam, props, cables, expander thingy, flir, guidance)
+		-Still deciding on platform
+		-Next talk with Z 2 weeks from next wednesday
+	-Austin
+		-Working on integration doc.
+	-Steve
+		-Got RTABMAP working on Jetson. Will be experimenting on Odroid
+		-Determine processing draw and which processes are using processing power
+	-Taylor
+		-Looking into target discrimination and tracking
+		-OpenCV using erode, dilate, and masking
+		-This has been done and there is a lot of info on the topic
+		-Get target tracking up and running using a grayscale webcam
+	-Tyler
+		-Work on mass budget
+		-Work on power budget
+		-Make new prop guards with Matt
+		-Got aliencopter flying
+	-Matt
+		-Will be maintaining hardware interfaces
+		-Support testing space and manage vicon data.
+	-Brice
+		-Need to get pixhawk flying
+		-Use gps topics to send pos
+		-Figure out how pixhawk works when mission planner is removed from the loop
+	-Ed
+		-Simulation for the quad
+		-Got software in the loop installed
+		-Next step: integrate with software in the loop
+	
+		
