@@ -1,0 +1,24 @@
+Tuesday 10/6/15
+
+What is the min range of Hokuyo?
+- 20 cm
+
+XtionPRO 
+- Leaving sensor as is with the exclusion of the outer housing
+  due to the need for precise calibration
+
+October 21 
+- PDR
+
+=> Tuesday, October 12
+	- Run through the presentation slides
+=> Wednesday, October 13 
+	- Steve and Taylor present estimator and target tracking
+
+Action Items:
+- Start slides
+	Tyler - hardware
+	Bryce - controls
+	Matt - mechanical integration, test set up
+	Steve - estimation
+	Taylor - target tracking
