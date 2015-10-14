@@ -1,0 +1,24 @@
+Notes from Flynet team mtg 13 Oct:
+
+Neareset obstacle detection: Box on Slide 5, add ultrasonics inputs
+indicate the number of IMUs and cameras
+Describe odometry estimate contents: Local NED with orientation
+
+Slide 9: Add math / description of FAST / BRIEF
+	Add a one-liner about BRIEF
+
+Slide 10: 2d-2d and 3d-2d
+Scale estimation from the motion estimation filter
+
+Slide 11: Depth maps unavailable for other camera pairs
+
+Slide 12: Filter recovers scale parameter as part of the metric filter
+	Add link to Kneip, Weiss, and Siegwart
+	Replace 'EKF' by 'black box' 
+	Pull first sentence, replace with 'metric scale estimator black box'
+
+Slide Add:
+	Evaluation of other SLAM techniques / comparison: 
+		LSD-Slam
+		RGBD-Slam
+Everything on Slide 5 is out of the box functions
