@@ -71,9 +71,9 @@
 %\usecolortheme{wolverine}
 
 %\setbeamertemplate{footline} % To remove the footer line in all slides uncomment this line
-%\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
+\setbeamertemplate{footline}[page number] % To replace the footer line in all slides with a simple slide count uncomment this line
 
-%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
 }
 
 \usepackage{graphicx} % Allows including images
@@ -185,12 +185,13 @@ Given a set of sensors, produce a metrically accurate 3-D map of the world while
 \section{Processing Algorithms}
 \begin{frame}
 \frametitle{\textit{Guidance} Processing: Feature Extractor / Descriptor}
-\
+
 \begin{itemize}
 \item{Independently run on each image (10 total)}
 \item{\textbf{FAST}: Features from Accelerated Segment Test}
 \item{Relies on corner detection to identify feature}
 \item{Characterized by a \textbf{BRIEF} descriptor: Binary Robust Independent Elementary Features}
+\item{Makes a bitmask of pixel intensity comparisons, where pixels are sampled from within a local patch of the feature}
 \item{Optimized for memory-constrained applications}
 \end{itemize}
 
@@ -212,6 +213,7 @@ Given a set of sensors, produce a metrically accurate 3-D map of the world while
 \begin{itemize}
 \item{Uses a sliding block matching algorithm}
 \item{Computes a dense depth maps for two pairs most aligned in the overall direction of travel}
+\item{Other three stereo depth maps are unavailable}
 \item{External 20Hz frame rate of depth map}
 
 \end{itemize}
@@ -220,8 +222,9 @@ Given a set of sensors, produce a metrically accurate 3-D map of the world while
 \begin{frame}
 \frametitle{\textit{Guidance} Processing: Sensor Fusion}
 \begin{itemize}
-\item{Based on metric scale EKF of Kneip, Weiss, and Siegwart}
+\item{Based on metric scale estimator black box of Kneip, Weiss, and Siegwart}
 \item{Relies on short-term integration of gyro measurements between successive samples}
+\item{Recovers the scale parameter when using mono motion estimates}
 \item{Incorporates both stereo and mono motion estimates}
 \item{External 10Hz data rate}
 \end{itemize}
@@ -291,5 +294,11 @@ Given a set of sensors, produce a metrically accurate 3-D map of the world while
 \end{figure}
 \end{frame}
 
-
+\begin{frame}
+\frametitle{Comparison to Other SLAM Techniques}
+\begin{itemize}
+\item{\textit{LSD-SLAM}: Large Scale Dense SLAM: Requires scale parameter estimation external to the system}
+\item{\textit{RGBD-SLAM}: Does not provide for loop closure detection (worse map quality)}
+\end{itemize}
+\end{frame}
 \end{document} 
