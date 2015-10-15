@@ -76,6 +76,12 @@
 \setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
 }
 
+\usebackgroundtemplate{
+    \includegraphics[width=\paperwidth,height=\paperheight]{figures/background}
+}
+\setbeamertemplate{frametitle}[default][center]
+\setbeamercolor{frametitle}{bg=}
+
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 
@@ -127,6 +133,7 @@ Given a set of sensors, produce a metrically accurate 3-D map of the world while
 
 \begin{frame}
 \frametitle{Sensor Suite}
+\vspace{1.6\baselineskip}
 \begin{itemize}
 \item{\textit{Inertial}} 6DOF inertial data is available with calibration parameters
 \item{\textit{Depth}} Dense metric depth imagery is available with a pinhole camera model
@@ -151,6 +158,7 @@ Given a set of sensors, produce a metrically accurate 3-D map of the world while
 
 \begin{frame}
 \frametitle{Data Flow Block Diagrams}
+\vspace{1.6\baselineskip}
 \begin{figure}
 \vspace{-0.5cm}
 \includegraphics[width=0.8\textwidth]{figures/RTABMapBlock}
@@ -245,6 +253,7 @@ Given a set of sensors, produce a metrically accurate 3-D map of the world while
 
 \begin{frame}
 \frametitle{\textit{RTABMap} Processing: Pose Graph Optimization}
+\vspace{1.6\baselineskip}
 \begin{itemize}
 \item{SLAM problem represented as a graph: nodes are poses, links are rigid transformations}
 \item{Solve by finding minimum residual of estimated poses and estimated transformations that explain measurements}
@@ -260,6 +269,7 @@ Given a set of sensors, produce a metrically accurate 3-D map of the world while
 
 \begin{frame}
 \frametitle{\textit{RTABMap} Processing: Loop Closure Detection}
+\vspace{1.6\baselineskip}
 \begin{itemize}
 \item{Evaluated by comparing extracted visual words of every \textit{N}$^{th}$ frame against saved visual word dictionary}
 \item{Creates additional pose graph transformation constraints to limit effect of visual drift}
@@ -283,6 +293,7 @@ Given a set of sensors, produce a metrically accurate 3-D map of the world while
 
 \begin{frame}
 \frametitle{\textit{RTABMap} Processing: Map Generation}
+\vspace{1.6\baselineskip}
 \begin{itemize}
 \item{Map is stored as an OctoMap}
 \item{Eight-connected map storing three states: $\{$unknown, empty, known$\}$}
