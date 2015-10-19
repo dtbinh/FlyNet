@@ -1,46 +1,48 @@
 
 clear all; close all; clc
 
-% %% DJI - Matrice 100
-% %m              % quad mass     [kg]
-% g = 9.81;       % grav accel    [m/s/s]
-% r = .1651;      % prop radius   [m] .11938
-% V = 22.2;       % batt voltage  [V]  14.8
-% rho = 1.225;    % air density   [kg/m3]
-% eta = .85;      % trans efficiency
-% batt = 4500;    % batt rating   [mAh] 
-% I_extra = 1394;     % current used by elec [mA]
-% MaxI = 20;
-% 
+%% DJI - Matrice 100
+%m              % quad mass     [kg]
+g = 9.81;       % grav accel    [m/s/s]
+r = .1651;      % prop radius   [m] .11938
+V = 22.2;       % batt voltage  [V]  14.8
+rho0 = 1.225;    % air density   [kg/m3]
+rho = 0.98;
+eta = .85;      % trans efficiency
+batt = 4500;    % batt rating   [mAh] 
+I_extra = 1394;     % current used by elec [mA]
+MaxI = 20;
+
 m = linspace(1.5,4,35);
 
+Curr0 = @(M) 4*(1/eta).*(M.*g).^(3/2)./(4*r*V*sqrt(2*pi*rho0));
 Curr = @(M) 4*(1/eta).*(M.*g).^(3/2)./(4*r*V*sqrt(2*pi*rho));
 EstTime = @(i) (batt/1000)./i.*60;
-% 
-% % endurance based on motors
-% I = Curr(m);
-% t = EstTime(I);
-% % endurance with extra guidance/odroid
-% I2 = Curr(m)+I_extra/1000;
-% t2 = EstTime(I2);
-% % flynet point
-% fly = EstTime(Curr(2.77)+I_extra/1000);
-% fly_1lb = EstTime(Curr(3.22)+I_extra/1000);
-% str1 = sprintf('(2.77,%2.2f)',fly);
-% str2 = sprintf('(3.22,%2.2f)',fly_1lb);
-% 
-% A = [2.3 22; 2.8 17; 3.2 13];
-% figure(1)
-% hold on
-% plot(A(:,1),A(:,2),'ro','MarkerFaceColor','r');
-% plot(m,t,'b','LineWidth',2);
-% plot(m,t2,'m','LineWidth',2);
-% plot(2.77,fly,'go','MarkerFaceColor','g');
-% text(2.52,fly-1.25,str1,'rotation',0);
-% plot(3.22,fly_1lb,'ko','MarkerFaceColor','k');
-% text(2.98,fly_1lb-1.25,str2,'rotation',0);
-% xlabel('M_T_O [kg]'); ylabel('Duration [min]'); title('M100 Theoretical Endurance');
-% legend('Mfg claim','Est Endurance','Endurance w/ Guidance','FlyNet - Guidance','FlyNet - Guidance& 1 lb PL');
+
+% endurance based on motors
+I = Curr0(m);
+t = EstTime(I);
+% endurance with extra guidance/odroid
+I2 = Curr(m)+I_extra/1000;
+t2 = EstTime(I2);
+% flynet point
+fly = EstTime(Curr(2.77)+I_extra/1000);
+fly_1lb = EstTime(Curr(3.22)+I_extra/1000);
+str1 = sprintf('(2.77,%2.2f)',fly);
+str2 = sprintf('(3.22,%2.2f)',fly_1lb);
+
+A = [2.3 22; 2.8 17; 3.2 13];
+figure(1)
+hold on
+plot(A(:,1),A(:,2),'go','MarkerFaceColor','g');
+plot(m,t,'b','LineWidth',2);
+plot(m,t2,'m','LineWidth',2);
+plot(2.77,fly,'ro','MarkerFaceColor','r');
+text(2.52,fly-1.25,str1,'rotation',0);
+plot(3.22,fly_1lb,'ko','MarkerFaceColor','k');
+text(2.98,fly_1lb-1.25,str2,'rotation',0);
+xlabel('M_T_O [kg]'); ylabel('Duration [min]'); title('M100 Hovering Endurance');
+legend('Mfg claim','Est Endurance','Endurance w/ Guidance','FlyNet - Guidance','FlyNet - Guidance& 1 lb PL');
 
 
  %% AlienBee 450 
@@ -48,7 +50,7 @@ EstTime = @(i) (batt/1000)./i.*60;
 g = 9.81;       % grav accel    [m/s/s]
 r = .11938;     % prop radius   [m] 
 V = 14.8;       % batt voltage  [V]  
-rho = 1.225;    % air density   [kg/m3]
+rho = 0.98; %1.225;    % air density   [kg/m3]
 eta = .85;      % trans efficiency
 batt = 4500;    % batt rating   [mAh] 
 I_extra = [2228.57 1669.11];     % current used by elec [mAh]
@@ -91,6 +93,6 @@ plot(2.38,Fly_gu_1lb,'ko','MarkerFaceColor','k');
 % text(1.93,Fly_gu-1.5,strgu,'rotation',0);
 % text(2.38,Fly_gu_1lb-1.5,strgu_1lb,'rotation',0);
 
-xlabel('M_T_O [kg]'); ylabel('Duration [min]'); title('AlienBee Theoretical Endurance');
-legend('RGBD','Guidance','FlyNet - RGBD','FlyNet - RGBD & 1lb PL','FlyNet - Guidance & 1lb PL', 'FlyNet - Guidance');
+xlabel('M_T_O [kg]'); ylabel('Duration [min]'); title('AlienBee Hovering Endurance');
+legend('RGBD','Guidance','FlyNet - RGBD','FlyNet - RGBD & 1lb PL','FlyNet - Guidance', 'FlyNet - Guidance & 1lb PL');
 
