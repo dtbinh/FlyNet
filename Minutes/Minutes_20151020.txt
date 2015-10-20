@@ -1,0 +1,35 @@
+Meeting Minutes October 20, 2015
+
+Presentation Rundown:
+ 
+Drew- Starts. 	Presentation Overview, Org Chart, Con Ops.
+	      	System Block Diagram: (Guidance, SLAM, Target Tracking, Planning, Flight Control)
+	      
+Tyler- 		Hardware Platform (Requirements and Solution), Power and Mass budgets, Endurance metrics, Search and rescue,
+		Possible improvements, Custom Modifications, Helps with doorway passes, min speed test 
+
+Ed- 		Quadcopter Control (Requirements and Solution), Pixhawk inputs and outputs, Interface
+		Breakdown of control architecture, 
+
+Steve-		Localization and Mapping, Requirements and Solution, Perception Sensor Suite
+		Sensor Architecture, Mapping Architecture, Alternate SLAM options,  
+
+Austin- 	Target ID and Tracking, Requirements and Solution, Tracking Method, Tracking Architecture, 
+		Planning and Guidance (For Navigation), Planning and replanning during test, Planning methods (Cell decomp.,
+		Potential Fields, Sampling Based), Tree based planners (alternative), Open motion planning library (time consuming), 
+		Planning issues, Block diagram for planning, Moving forward
+
+Tyler- 		End of semester test, knows, unknowns, tasks to complete, 
+ 
+Drew-		First semester deliverables, Unaddressed Requirements (target tagging, multi robots, multi vehicle coordination),
+		Updated Requirements (lighting removed, 0.5 lb external payload, Target ID rate down to 5 Hz), Budget, 
+		Schedule (Gantt Chart) 
+
+Timing Breakdown:
+Drew: 8.5 min.
+Tyler: 5 min. 
+Ed: 5.5 min.
+Steve: 3.5 min. 
+Austin: 13 min.
+Tyler: 1.5 min.
+Drew: 6 min.
