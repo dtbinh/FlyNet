@@ -1,0 +1,3 @@
+hostname: flynet
+user: odroid
+password: odroid
