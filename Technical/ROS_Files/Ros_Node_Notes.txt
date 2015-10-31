@@ -1,0 +1,25 @@
+Ros Node Notes:
+----------------
+Publish/Subscriber Node:
+-------------------------
+So we can write a publisher and subscriber, 
+specify loop rates. Etc. See:
+
+http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29
+
+So you can use catkin tools to generate build lists and what not. 
+
+These just constantly publish/subscribe to running streams of info. 
+Publisher tightly describes what's being published while subscriber 
+runs a callback function on what's being subscribed to. 
+
+Service/Client Node:
+---------------------
+Services are based on call response, you can define a structure of them.
+Available services get advertised. 
+Clients can then be created that use the advertised services. 
+
+Async Spinner 
+-> use this for subscriber 
+-> 
+

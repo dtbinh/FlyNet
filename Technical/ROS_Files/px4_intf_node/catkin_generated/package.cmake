@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "px4_intf_node")
+set(px4_intf_node_MAINTAINER "aanderson <aanderson@todo.todo>")
+set(px4_intf_node_DEPRECATED "")
+set(px4_intf_node_VERSION "0.0.0")
+set(px4_intf_node_BUILD_DEPENDS "mavros" "ros_vrpn_client" "roscpp" "rospy" "std_msgs")
+set(px4_intf_node_RUN_DEPENDS "mavros" "ros_vrpn_client" "roscpp" "rospy" "std_msgs")
+set(px4_intf_node_BUILDTOOL_DEPENDS "catkin")

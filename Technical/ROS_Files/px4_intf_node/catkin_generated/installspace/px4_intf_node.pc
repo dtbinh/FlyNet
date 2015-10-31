@@ -1,0 +1,8 @@
+prefix=/home/aanderson/catkin_ws/install
+
+Name: px4_intf_node
+Description: Description of px4_intf_node
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/aanderson/catkin_ws/install/lib 
+Requires: 
