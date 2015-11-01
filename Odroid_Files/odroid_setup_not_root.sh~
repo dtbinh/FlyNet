@@ -15,5 +15,4 @@ source ~/.bashrc
 
 cd src/
 git clone https://github.com/mavlink/mavros
-cd ..
 
