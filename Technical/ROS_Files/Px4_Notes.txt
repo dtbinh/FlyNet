@@ -1,0 +1,151 @@
+position_inav
+---------------
+Big Question:
+Where/how to publish local pos/vel?
+Big Answer: 
+See below, but the short of it is that 
+the steams are set valid as long as they don't time out.
+ALSO! 
+Need valid weight vectors in PARAM!
+
+Take a look at:
+
+https://pixhawk.org/dev/ros/visual_estimation
+
+shows connection diagrams....
+
+
+Q: How to publish to Px4 ie which topic?
+
+Q:
+How is vision different than mocap?
+
+
+A:
+Vision has both pos/vel -> SLAM
+Mocap has just pos -> Vicon
+
+Mocap for Vicon, but it maps x->x y->y z->z
+
+GPS -> Local
+Ref to EPH/EPV...
+x_est
+y_est
+z_est
+
+subscribes to:
+---------------
+param update
+actuators 
+armed
+sensor combined
+vehicle attitude
+optical flow
+vehicle gps position
+vision postioion estimate
+att/pos mocap
+home position 
+distance sensor 
+
+publishes to:
+--------------
+vehicle local position 
+vehicle global position 
+
+
+
+mc_pos_control
+---------------
+subscirbes to:
+--------------
+vehicle attitude
+vehicle attitude set_point
+vehicle local pos -> includes local pos and velocities in xyz
+position setpoint triplet
+position set point local
+position vleocity set point 
+
+publishes to:
+--------------
+attitude set point
+local position setpoint
+vehicle global setpoint 
+
+Vis Pos Estimation
+---------------------
+Setup directly for us...
+So we need MSF: Multiple Sensor Fusion Framework
+MSF needs to be built on ODroid
+Disable subscriber thing
+Then update msf_updates file
+Oh, uh so this is to fuse a camer and Px4 IMU so only maybe need MSF
+
+Need to set:
+CBRK_NO_VISION to 0
+-> Already set in inav_params.cpp
+
+SHOULD BE ready to run as is...
+
+Set Point Commands:
+---------------------
+Take a look at:
+
+https://pixhawk.org/dev/ros/mavros_offboard
+
+Needs to run mavsys from mavros for that to work...
+
+
+
+Ok so just reference the actual types:
+
+setpoint_position:
+
+geometry_msgs/PoseStamped
+
+may need this include:
+
+#include "geometry_msgs/PoseStamped.h"
+#include "geometry_msgs/Vector3Stamped.h"
+
+setpoint_attitude:
+
+geometry_msgs/TwistStamped
+
+vision_pose_estiamte:
+
+geometry_msgs/PoseStamped
+
+vision_speed_estiamte:
+
+geometry_msgs/Vector3Stamped
+-> same header 
+-> 
+
+etc.
+
+Ex Making that:
+
+    // Send a goal to move_base
+    move_base_msgs::MoveBaseGoal goal;
+    goal.target_pose.header.frame_id = "map";
+    goal.target_pose.header.stamp = ros::Time::now();
+ 
+    goal.target_pose.pose.position.x = 18.174;
+    goal.target_pose.pose.position.y = 28.876;
+    goal.target_pose.pose.orientation.w = 1;
+
+Ex Attitude:
+
+       msg.header.stamp = ros::Time::now();
+       msg.header.seq=1;
+       msg.twist.linear.x = 1;
+       msg.twist.angular.x = 1;
+
+Useful link:
+
+http://wiki.ros.org/tf/Tutorials/Writing%20a%20tf%20broadcaster%20%28C%2B%2B%29
+	
+	
+
+
+
