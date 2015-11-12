@@ -1,0 +1,50 @@
+Flight Test Procedure for Odroid:
+----------------------------------
+1. ssh into odroid:
+odroid@flynet01
+password:
+odroid
+
+2. Run source devel/setup.bash
+3. Run from catkin_ws:
+$ roslaunch mavros px4.launch
+this turns on mavlink on the px4 and starts mavros node and roscore node
+4. Run from catkin_ws:
+ $ rosrun ros_vrpn_client ros_vrpn_client __name:=Terminator _vrpn_server_ip:=192.168.20.100
+use Terminator for our quad. This starts the ros_vrpn_client node.
+5. Run from catkin_ws:
+ $ rosrun vicon_repeater_node vicon_repeater_node
+This will start publishing the vicon data to the pixhawk's position_estimator_inav module
+6. Run from catkin_ws:
+ $ rosrun px4_intf_node px4_flynet_node
+This will try to force the quad into offboard mode, force it to guided, and force it to arm. 
+It will also publish position setpoints to the quad to it's mc_pos_control module. 
+This is the final ros program to run. 
+
+To Takeoff:
+------------
+1. Pilot has switch 5 in up position (MANUAL override mode)
+2. Pilot arms quad by pushing throttle down/right until beep is heard.
+3. Pilot tests motors manually
+4. Once satisfied, pilot can force automatic behavior by switching switch 5 to down position (OFFBOARD mode)
+
+To Land:
+--------
+Pilot must perform manual landing by:
+1. Take control of quad by switching switch 5 back to up position (MANUAL override mode).
+2. Pilot gently lands quad.
+3. Pilot disarms motors by pushing throttle down/left until beep is heard. 
+4. Any bag files should be transfered off the quad. 
+5. Once transfer of data is complete, run soft shutdown on odroid:
+$ sudo shutdown -h now
+6. Once lights on Odroid stop blinking, battery can be disconnected. 
+
+Topics to Monitor/Record During Flight:
+----------------------------------------
+/mavros/state -> Look for Arm State/Guided Enabled/OFFBOARD vs MANUAL modes
+/Terminator/pose -> Look at vicon reported position/orientation 
+/mavros/local_position/local -> Confirm Mavros pose/orientation estimates are reasonable (make sure z is not -16 m)
+/mavros/rc/out -> Look at raw motor commands, ~1100 is low throttle ~1900 is high throttle
+/mavros/setpoint_position/local -> Make sure our setpoints are what they're supposed to be
+
+/ 
