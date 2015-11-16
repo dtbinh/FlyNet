@@ -11,13 +11,15 @@ function [cameFrom] = astar()
 % Outputs:
 %   * path
 
+close all
+
 %% Define start and finish
-sizex = 5;
-sizey = 5;
-goalx = 2.5;
-goaly = 4;
+sizex = 20;
+sizey = 20;
+goalx = 10;
+goaly = 16;
 startx = 1;
-starty = 0;
+starty = 4;
 hold on
 plot(startx,starty,'o')
 plot(goalx,goaly,'x')
@@ -40,13 +42,16 @@ end
 [dum, index] = min(buffer);
 cameFrom(1,1) = openx(index);
 cameFrom(1,2) = openy(index);
-plot(openx(index),openy(index),'o') 
+% plot(openx(index),openy(index),'o') 
 xNode = openx(index); 
 yNode = openy(index);       % semantics
 closed = index;
-        
+lastx = [startx xNode];
+lasty = [starty yNode];
+
 step = 1;                   % Set up step tracking variable
 noPath = 1;                         % Set flag for completeing a path
+index
 cameFrom
 % Enter loop 
 while((xNode ~= goalx || yNode ~= goaly) && noPath == 1) 
@@ -55,8 +60,8 @@ while((xNode ~= goalx || yNode ~= goaly) && noPath == 1)
 end
 cameFrom(step,1) = goalx;
 cameFrom(step,2) = goaly;
-
+hold on
 plot(cameFrom(:,1),cameFrom(:,2),'--r')
-
+plot(lastx, lasty, '--r')
 end
 

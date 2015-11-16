@@ -43,15 +43,17 @@ y = 1:1:Y;
 numObst = X;
 % obstX = round(X*rand([10,1]));
 % obstY = round(Y*rand([10,1]));
-obstX = [1, 1.5, 3, 2.5, 3];
-obstY = [1, 3,   2, 1, 3]; 
+% obstX = [16, 4,  5, 8, 16,  5, 14, 10];
+% obstY = [ 8, 3, 10, 4,  3, 18, 14, 8]; 
+obstX = [16, 4,  5, 8, 16,  5];
+obstY = [ 8, 3, 10, 4,  3, 18]; 
 
 %% Generate points equi-distant between obstacles 
 % - Populate nx1 matrices Vx and Vy which hold in bounds only voronoi
 %   generated waypoints
-[vx, vy] = Voronoi(obstX, obstY)   % Calculate voronoi
-axis([0 6 -2 5])
-
+[vx, vy] = Voronoi(obstX, obstY);   % Calculate voronoi
+% axis([-110 41 -70 41])
+axis([-1 21 -1 21])
 
 %% Concatenate vx and vy
 for i = 1:1:numel(vx)
@@ -65,7 +67,7 @@ end
 x = vxf;
 y = vyf;
 % successor = zeros(numel(x),1);
-numel(x)
+numel(x);
 for i = 1:1:numel(x)
     index = 1;
 %     for j = i:1:numel(x)
@@ -90,6 +92,24 @@ for i = 1:1:numel(x)
     end
     index = 1;
 end
+% beforetrimm = numel(x)
+% x'
+% % xx= x;
+% % yy = y;
+% % neighborr = neighbor;
+% [~,ia] = unique(x, 'stable')
+% %% Get rid of repeat points
+% for i = 1:1:numel(ia)
+%     xx(i) = x(ia(i));
+%     yy(i) = y(ia(i));
+%     neighborr(i,:) = neighbor(ia(i),:);
+% end
+% % x = xx;
+% % y = yy;
+% % neighbor = neighborr;
+% aftertrim = numel(x)
+% x'
+
 
 %% Publish values
 
