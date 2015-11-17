@@ -1,14 +1,19 @@
-function [] = Space(sizex, sizey, startx, starty, goalx, goaly)
+function [] = Space(sizex, sizey, startx, starty, goalx, goaly, margin)
 % Written by Bryce Hill
 % 
 % Purpose: Define 2-D space to search 
 % 
 % Inputs:
-%   * none
+%   * sizex/y
+%   * startx/y
+%   * goalx/y
 % 
 % Outputs:
 %   * 2-D point .mat file
-%
+% 
+% ToDo:
+%   * Trim space points
+%   * Incorporate obstacle margin
 
 %% Generate 2D plane
 X = sizex;
@@ -43,10 +48,10 @@ y = 1:1:Y;
 numObst = X;
 % obstX = round(X*rand([10,1]));
 % obstY = round(Y*rand([10,1]));
-% obstX = [16, 4,  5, 8, 16,  5, 14, 10];
-% obstY = [ 8, 3, 10, 4,  3, 18, 14, 8]; 
-obstX = [16, 4,  5, 8, 16,  5];
-obstY = [ 8, 3, 10, 4,  3, 18]; 
+obstX = [16, 4,  5, 8, 16,  5, 14, 10, 10, 18, 10, 10, 10];
+obstY = [ 8, 3, 10, 4,  3, 18, 14, 8,  12, 18, 17, 11, 6]; 
+% obstX = [16, 4,  5, 8, 16,  5];
+% obstY = [ 8, 3, 10, 4,  3, 18]; 
 
 %% Generate points equi-distant between obstacles 
 % - Populate nx1 matrices Vx and Vy which hold in bounds only voronoi
@@ -60,26 +65,67 @@ for i = 1:1:numel(vx)
     vxf(i) = vx(i);
     vyf(i) = vy(i);
 end
-
-%% Calculate neighbors
-% x = [startx; vxf'; goalx];     % Add start point as 
-% y = [starty; vyf'; goaly];
 x = vxf;
 y = vyf;
-% successor = zeros(numel(x),1);
+
+%% Trim points to be within the valid space
+for i = 1:2:numel(x)    % Loop over number of lines
+    % case 9: both out of bounds
+    if (x(i) < 0) || (x(i) > sizex)
+        if (x(i+1) < 0) || (x(i+1) > sizex) 
+            if (y(i) < 0) || (y(i) > sizey)
+                if (y(i+1) < 0) || (y(i+1) > sizey)
+            % erase neighbors of 1st point, path is invalid
+%             neighbor(i,2) == 0;
+%             neighbor(i,3) == 0;
+%             neighbor(i,4) == 0;
+            % erase neighbors of 2nd point
+%             neighbor(i+1,2) == 0;
+%             neighbor(i+1,3) == 0;
+%             neighbor(i+1,4) == 0;
+            % Delete nodes
+            disp('i')
+            xplot = [x(i+1), x(i)];
+            yplot = [y(i+1), y(i)];
+            plot(xplot, yplot, '-.w')
+            x(i) = 0;
+            x(i+1) = 0;
+            y(i) = 0;
+            y(i+1) = 0;
+            x = [x(1:(i-1)),x((i+1):end)];
+            y = [y(1:(i-1)),y((i+1):end)];
+                end
+            end
+        end
+    else
+        disp('wo')
+    end
+
+    % case 1: x < 0
+%     elseif (x(i) < 0) || (x(i) > sizex)
+%         m = (y(i+1) - y(i)) / (x(i+1) - x(i));
+%         for i = x(i):.5:x(i+1)
+%             xnew = (y(i+1) - y(i))/m - x(i+2);
+%             if (xnew > 0) && (xnew < sizex)
+%                 break
+%             end
+%         end
+end
+
+
+%% Calculate neighbors
 numel(x);
 for i = 1:1:numel(x)
     index = 1;
-%     for j = i:1:numel(x)
     flag = 0;
     for j = 1:1:numel(x)
-        if x(i) == x(j)
-            if y(i) == y(j)
-                if mod(i,2) == 0            
+        if x(i) == x(j)     % Check that x's are equal
+            if y(i) == y(j)     % Check that y's are equal
+                if mod(j,2) == 0    % Even result          
                     neighbor(i,index) = j-1;
                     index = index +1;
                     flag = 1;
-                else
+                else                % Odd result
                     neighbor(i,index) = j+1;
                     index = index +1;
                     flag = 1;
@@ -88,10 +134,117 @@ for i = 1:1:numel(x)
         end
     end
     if(flag == 0)
-        neighbor(i,index) = 18;
+%         neighbor(i,index) = 18;
     end
     index = 1;
 end
+
+%% Eliminate connections within marginal distance of obstacles
+for i = 1:2:numel(x)    % Loop over number of lines
+    for j = 1:1:numel(obstX)    % For each line, loop over each obstacle
+        % Define variables for ease of readability
+        y2 = y(i+1);
+        y1 = y(i);
+        x2 = x(i+1);
+        x1 = x(i);
+        px = obstX(j);
+        py = obstY(j);
+   
+        % Calculate distance from line to obstacle
+        d = abs((y2-y1)*px-(x2-x1)*py+x2*y1-y2*x1)/sqrt((y2-y1)^2+(x2-x1)^2);
+        
+        % Check to find vertex, the point on the line closest to the
+        % obstaculo
+        d1obst = distance(x1, y1, px, py);
+        d2obst = distance(x2, y2, px, py);
+        if d1obst < d2obst
+            d13 = d1obst;
+            d23 = d2obst;
+        else
+            d13 = d2obst;
+            d23 = d1obst;
+        end
+        d12 = distance(x1, y1, x2, y2);
+        angle = acosd((d12^2+d13^2-d23^2)/(2*d12*d13));
+        
+        if (d <= margin) && (angle <= 90)      % if obstacle is too close to path
+            for k = 1:1:3
+                if neighbor(i,k) == i+1     % find neighbor of ith node that is i+1 and delete that connection
+                    neighbor(i,k) == 0;
+                    
+                    % visualization aids ---------
+                    plot(obstX(j),obstY(j),'or')    % Plot encroaching obstaculo
+                    xth = (x2-x1)/2 + min(x2,x1);
+                    yth = (y2-y1)/2 + min(y2,y1);
+                    xths = [xth obstX(j)];
+                    yths = [yth obstY(j)];
+                    plot(xths,yths,'-.g')
+                    xx = [x1 x2];
+                    yy = [y1 y2];
+                    plot(xx, yy,'--w')
+                    % ----------------------------
+                end
+                if neighbor(i+1,k) == i     % find neighbor of i+1 node that is ith and delete that connection
+                    neighbor(i+1,k) == 0    
+                end
+            end
+        end
+    end
+end
+                
+                    
+
+%% Publish values
+
+save('space.mat');
+% save('spaceVec.mat','spaceVec','spaceVecX','spaceVecY');
+% save('xy.mat','x','y');
+% save('obstacles.mat','obstX','obstY');
+end
+
+
+
+
+
+
+
+
+
+
+% %% Eliminate connections within marginal distance of obstacles
+% for i = 1:2:numel(x)    % Loop over number of lines
+%     for j = 1:1:numel(obstX)    % For each line, loop over each obstacle
+%         % Define variables for ease of readability
+%         y2 = y(i+1);
+%         y1 = y(i);
+%         x2 = x(i+1);
+%         x1 = x(i);
+%         px = obstX(j);
+%         py = obstY(j);
+%         % Calculate distance from line to obstacle
+%         d = abs((y2-y1)*px-(x2-x1)*py+x2*y1-y2*x1)/sqrt((y2-y1)^2+(x2-x1)^2);
+%         % Calculate distance from line origin 
+%         d1 = distance(x1, px, y2, py);
+%         if d <= margin      % if obstacle is too close to path
+%             for k = 1:1:3
+%                 if neighbor(i,k) == i+1     % find neighbor of ith node that is i+1 and delete that connection
+%                     neighbor(i,k) == 0;
+%                     plot(obstX(j),obstY(j),'or')    % Plot encroaching obstaculo
+%                     xth = (x2-x1)/2 + min(x2,x1);
+%                     yth = (y2-y1)/2 + min(y2,y1);
+%                     xths = [xth obstX(j)];
+%                     yths = [yth obstY(j)];
+%                     plot(xths,yths,'-.g')
+%                 end
+%                 if neighbor(i+1,k) == i     % find neighbor of i+1 node that is ith and delete that connection
+%                     neighbor(i+1,k) == 0    
+%                 end
+%             end
+%         end
+%     end
+% end
+             
+
 % beforetrimm = numel(x)
 % x'
 % % xx= x;
@@ -109,55 +262,6 @@ end
 % % neighbor = neighborr;
 % aftertrim = numel(x)
 % x'
-
-
-%% Publish values
-
-save('space.mat');
-save('spaceVec.mat','spaceVec','spaceVecX','spaceVecY');
-save('xy.mat','x','y');
-save('obstacles.mat','obstX','obstY');
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 %% Generate points equi-distant between obstacles 
 % - Populate nx1 matrices Vx and Vy which hold in bounds only voronoi

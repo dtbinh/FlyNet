@@ -1,12 +1,9 @@
-function [cameFrom] = astar()
-% function [] = astar(goalx, goaly, startx, starty)
+function [] = astar()
 % Written by Bryce Hill
 % 
 % Purpose: _ 2-D space to search 
 % 
 % Inputs:
-%   * goal (x,y)
-%   * start (x,y)
 % 
 % Outputs:
 %   * path
@@ -16,15 +13,18 @@ close all
 %% Define start and finish
 sizex = 20;
 sizey = 20;
-goalx = 10;
-goaly = 16;
+goalx = 12;% 12
+goaly = 18;% 6
 startx = 1;
 starty = 4;
+term = 5;   % termination radius limit
+margin = 1; % distance allowed between vehicle and obstacles
+
 hold on
 plot(startx,starty,'o')
 plot(goalx,goaly,'x')
 %% Define operating space and generate obstacles
-Space(sizex, sizey, startx, starty, goalx, goaly);
+Space(sizex, sizey, startx, starty, goalx, goaly, margin);
 load('space.mat')   % Load vectors which define space and obstacles
 
 %% Declare Closed and Open sets
@@ -50,13 +50,13 @@ lastx = [startx xNode];
 lasty = [starty yNode];
 
 step = 1;                   % Set up step tracking variable
-noPath = 1;                         % Set flag for completeing a path
-index
-cameFrom
+noPath = 1;                 % Set flag for completeing a path
+index;
+cameFrom;
 % Enter loop 
 while((xNode ~= goalx || yNode ~= goaly) && noPath == 1) 
-    [xNode, yNode, cameFrom, closed, index, step, noPath] = successor(xNode, yNode, openx, openy, cameFrom, length, neighbor, index, closed, goalx, goaly, step);
-    cameFrom
+    [xNode, yNode, cameFrom, closed, index, step, noPath] = successor(xNode, yNode, openx, openy, cameFrom, length, neighbor, index, closed, goalx, goaly, step,term);
+    cameFrom;
 end
 cameFrom(step,1) = goalx;
 cameFrom(step,2) = goaly;
