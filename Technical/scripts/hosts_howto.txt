@@ -1,0 +1,10 @@
+Using ubuntu 
+------------
+1. Navigate to /etc
+2. In /etc edit hosts
+3. In hosts add: above the IPv6 entries below existing IPv4 entries:
+
+192.168.20.42   flynet01.local flynet01
+
+4. In the setFlynetMaster.sh script, change:
+line 3: export ROS_IP=192.168.20.XXX to your current IP address 
