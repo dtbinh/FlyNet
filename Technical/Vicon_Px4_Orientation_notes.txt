@@ -1,0 +1,13 @@
+Vicon New Terminator Notes:
+----------------------------
+Facing Flight Direction Towards True North:
+-------------------------------------------
+Movement	Vicon	PX4 Local
+--------	-----	---------
+Pith up		-x		-y
+Pitch down	+x		+y
+Roll Left	+z		+x
+Roll Right	-z		-x
+Yaw Right	+y		-z
+Yaw Left	-y		+z
+
