@@ -70,6 +70,7 @@ classdef PRM < Navigation
         localGoal       % next vertex on the roadmap
         localPath       % set of points along path to next vertex
         gpath           % list of vertices between start and goal
+        localSp         % intermediate set point %%%
     end
 
     methods
@@ -210,6 +211,9 @@ classdef PRM < Navigation
             end
 
             n = prm.localPath(1,:)';     % take the first point
+            %%%
+            prm.localSp = [prm.localSp; prm.localPath(end,:)'];
+            %%%
             prm.localPath = prm.localPath(2:end,:); % and remove from the path
         end
 
