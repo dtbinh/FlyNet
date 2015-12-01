@@ -1,5 +1,4 @@
 clc; clear; close all;
-profile on
 %% NEEDS rvctools IN MATLAB PATH
 
 % Dimensions of Flemming space [ft/in]
@@ -82,6 +81,7 @@ imagesc(map)
 save('map.mat', 'map')
 
 %%
+profile on
 % Now we create an instance of a robot with the PRM navigation algorithm
 prm = PRM(map);
 
@@ -93,16 +93,19 @@ randinit
 goal  = [22.5,40]*12;
 start = [12.5,2.5]*12;
 
+tic
 % then ask the robot to plan a path to goal (it will take few seconds)
 prm.plan();
-
+toc
 % The roadmap planner does not need to know, yet, the goal or start positions, it
 % chooses random points in the world and tries to find obstacle-free paths between
 % them (like railway lines or freeways)
-
+tic
 % Now we can display the obstacles and the cost to reach the goal from every
 % point in the world
 prm.plot();
+toc
+profile viewer
 
 % Now we can execute the planned path, it will be animated with green dots
 prm.path(start, goal)
@@ -122,6 +125,5 @@ path.z   = timeseries(36*ones(9,1),timeline);
 path.psi = timeseries(zeros(9,1),timeline);
 save('pathFlemming.mat', 'path');
 
-profile viewer
 
 
