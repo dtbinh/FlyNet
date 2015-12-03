@@ -7,7 +7,7 @@ clear all; close all; clc;
 v0 = linspace(0,18,2*18); % velocities                 [m/s]
 g = 9.81;              % gravitorial acceleration   [m/s/s]
 theta_max = 30;        % max pitch angle,           [deg]
-%Izz = ;               % moment of inertia          [kg*m*m]
+Izz = 0.0191;          % moment of inertia          [kg*m*m]
 L = .13335;            % length of quad             [m]
 F1 = 9.81*.6;          % max motor thrust           [N]
 %F2 = ;
@@ -16,19 +16,19 @@ in2m = 0.0254;         % inches to meters
 
 %% Moment of Inertia Calc
 
-% Arm bars
-ms = (75/1000);
-Is = ms/12*((1*in2m)^2+(5.5*in2m)^2);
-% Motors
-mm = (79.3/1000);
-Im = mm/12*(3*(9/8/2*in2m)^2+(7/8*in2m)^2);
-% Battery
-mb = (482.7/1000);
-Ib = mb/12*((6.5*in2m)^2+(1.5*in2m)^2);
-% Center
-Ic = (811.25/1000)/12*((14*in2m)^2+(9/4*in2m)^2);
-
-Izz = Ic + (Ib+mb*(2*in2m)^2) + (Is+ms*(4.25*in2m)^2) + (Im+mm*(5.25*in2m)^2);
+% % Arm bars
+% ms = (75/1000);
+% Is = ms/12*((1*in2m)^2+(5.5*in2m)^2);
+% % Motors
+% mm = (79.3/1000);
+% Im = mm/12*(3*(9/8/2*in2m)^2+(7/8*in2m)^2);
+% % Battery
+% mb = (482.7/1000);
+% Ib = mb/12*((6.5*in2m)^2+(1.5*in2m)^2);
+% % Center
+% Ic = (811.25/1000)/12*((14*in2m)^2+(9/4*in2m)^2);
+% 
+% Izz = Ic + (Ib+mb*(2*in2m)^2) + (Is+ms*(4.25*in2m)^2) + (Im+mm*(5.25*in2m)^2);
 
 %% Analysis 1
 %{
@@ -98,7 +98,8 @@ p1 = plot([0;rs(2)],[18.35;18.35],'r');
 plot([0;rs2(2)],[5;5],'b');
 p2 = plot([rs2(2); rs2(2)],[0; 5],'b');
 plot([rs(2);rs(2)],[0;18.35],'r');
-xlabel('V_0 [m/s]'); ylabel('Stopping Distance [m]'); title('Analysis 2: Rotation included, 30deg max pitch');
+xlabel('V_0 [m/s]'); ylabel('Stopping Distance [m]'); 
+%title('Analysis 2: Rotation included, 30deg max pitch');
 legend([p1,p2],'Max Guidance','Expected Guidance');
 
 subplot(2,1,2)
