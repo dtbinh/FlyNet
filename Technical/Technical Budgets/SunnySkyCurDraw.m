@@ -1,8 +1,8 @@
 % Motor Current Draw
 
-clear all; 
-%close all; 
-clc;
+% clear all; 
+% %close all; 
+% clc;
 
 %% Motor data
 % data is presented in the form [Throttle%, Current Draw (A), Thrust (g)]
@@ -11,13 +11,13 @@ p1038 = [.5 3.3 480; .65 5.4 650;.75 8.1 810;.85 11.9 1030; 1 15.2 1210];
 p1147 = [.5 3.9 530; .6 5.5 680; .65 6.9 790; .75 9.5 910; .8 11 1020; .85 13.9 1150; 1 16.8 1320];
 
 %% find curve to fit the line
-% xvalues - Current
+% xvalues - thrust
 thrust = linspace(300,1500,1000);
 % coefficients
 c0947 = polyfit(p0947(:,3),p0947(:,2),2);
 c1038 = polyfit(p1038(:,3),p1038(:,2),2);
 c1147 = polyfit(p1147(:,3),p1147(:,2),2);
-% evaluate poly to get thrust values
+% evaluate poly to get curr values
 f0947 = polyval(c0947,thrust);
 
 f1038 = polyval(c1038,thrust);
@@ -32,15 +32,16 @@ f1147 = polyval(c1147,thrust);
 
 figure()
 hold on
-f1 = plot(thrust,f0947,'r');
-plot(p0947(:,3),p0947(:,2),'ro','MarkerFaceColor','r');
-f2 = plot(thrust,f1038,'g');
-plot(p1038(:,3),p1038(:,2),'go','MarkerFaceColor','g');
-f3 = plot(thrust,f1147,'k');
-plot(p1147(:,3),p1147(:,2),'ko','MarkerFaceColor','k');
+% f1 = plot(thrust,f0947,'r');
+% plot(p0947(:,3),p0947(:,2),'ro','MarkerFaceColor','r');
+f2 = plot(thrust,f1038,'k');
+plot(p1038(:,3),p1038(:,2),'ko','MarkerFaceColor','k');
+% f3 = plot(thrust,f1147,'k');
+% plot(p1147(:,3),p1147(:,2),'ko','MarkerFaceColor','k');
 ylabel('Current [A]'); xlabel('Thrust [g]');
 % plot(current,fa1047,'m','LineWidth',2)
- legend([f1,f2,f3],'9x4.7','10x3.8','11x4.7','Location','Best'); title('Current vs Thrust Per Motor');
+%  legend([f1,f2,f3],'9x4.7','10x3.8','11x4.7','Location','Best'); 
+ title('Current vs Thrust Per Motor for 10x3.8 propeller');
 % xlabel('Current [A]'); ylabel('Thrust [g]');
 
 
