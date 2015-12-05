@@ -1,0 +1,12 @@
+SITL NOTES:
+------------
+-Need to determine how to connect mavlink to/froms...
+- Can run px4_iris_gazebo_mavros_posix_sitl.launch 
+	-> This runs mavlink_bridge
+	-> Seems to run it through GCS
+	-> Not connecting to a FCU....
+	-> How to connect to an FCU?
+	-> We can ask Steve:
+	example here:
+	
+	https://bitbucket.org/cuflynet/flynet_launches/src/a30faf01f7705b6cddde846c40fc9c403be1fcc0/vicon_test_fixup.launch?at=master&fileviewer=file-view-default

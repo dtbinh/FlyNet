@@ -4,5 +4,8 @@ rosbag record \
        /mavros/local_position/local \
        /mavros/setpoint_position/local \
        /mavros/rc/out \
-       /Terminator/pose 
+       /flynet/traj_gen \
+       /mavros/vision_pose/pose
+
+        
        
