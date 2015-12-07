@@ -71,6 +71,7 @@ classdef PRM < Navigation
         localPath       % set of points along path to next vertex
         gpath           % list of vertices between start and goal
         localSp         % intermediate set point %%%
+        nodeLocations   % all nodes in PRM
     end
 
     methods
@@ -275,6 +276,7 @@ classdef PRM < Navigation
                     end
                 end
                 new = [x; y];
+                prm.nodeLocations = [prm.nodeLocations, new];
 
                 vnew = prm.graph.add_node(new);
 

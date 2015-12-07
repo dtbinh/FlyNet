@@ -1,5 +1,4 @@
 clc; clear; close all;
-profile on
 %% NEEDS rvctools IN MATLAB PATH
 
 % Dimensions of Flemming space [ft/in]
@@ -90,8 +89,10 @@ prm = PRM(map);
 randinit
 
 % Now we define the goal and start coordinates
-goal  = [22.5,40]*12;
-start = [12.5,2.5]*12;
+% goal  = [22.5,40]*12;
+% start = [12.5,2.5]*12;
+start = [133, 230];
+goal = [282, 79];
 
 % then ask the robot to plan a path to goal (it will take few seconds)
 prm.plan();
@@ -122,6 +123,5 @@ path.z   = timeseries(36*ones(9,1),timeline);
 path.psi = timeseries(zeros(9,1),timeline);
 save('pathFlemming.mat', 'path');
 
-profile viewer
 
 
