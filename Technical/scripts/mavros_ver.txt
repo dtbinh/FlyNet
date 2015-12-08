@@ -1,0 +1,9 @@
+commit 099ce240792161dce865a1f0e5c01daa6ff000d3
+Author: Vladimir Ermakov <vooon341@gmail.com>
+Date:   Tue Nov 3 08:59:05 2015 +0300
+
+    readme: remove coverity
+
+diff --git a/README.md b/README.md
+index a90a1a3..000289d 100644
+
