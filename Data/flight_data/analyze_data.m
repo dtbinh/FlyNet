@@ -54,3 +54,10 @@ plot(setpointTime(startIdxSetpoint:endIdxSetpoint),zsetpoint(startIdxSetpoint:en
 xlabel('Time (s)','FontSize',16)
 ylabel('Z Position (m)','FontSize',16)
 grid on
+
+figure
+plot(xpose(startIdxPose:endIdxPose),ypose(startIdxPose:endIdxPose)), hold on
+plot(xsetpoint(startIdxSetpoint:endIdxSetpoint),ysetpoint(startIdxSetpoint:endIdxSetpoint))
+xlabel('X Position (m)','FontSize',16)
+ylabel('Y Position (m)','FontSize',16)
+grid on
