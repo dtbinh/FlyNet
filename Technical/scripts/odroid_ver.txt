@@ -1,0 +1,4 @@
+Welcome to Ubuntu 14.04.3 LTS (GNU/Linux 3.10.82 armv7l)
+
+Linux flynet01 3.10.82 #1 SMP PREEMPT Wed Sep 2 19:59:44 BRT 2015 armv7l armv7l armv7l GNU/Linux
+
