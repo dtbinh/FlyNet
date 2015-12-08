@@ -48,8 +48,11 @@ y = 1:1:Y;
 numObst = X;
 % obstX = round(X*rand([10,1]));
 % obstY = round(Y*rand([10,1]));
-obstX = [16, 4,  5, 8, 16,  5, 14, 10, 10, 18, 10, 10, 10];
-obstY = [ 8, 3, 10, 4,  3, 18, 14, 8,  12, 18, 17, 11, 6]; 
+load('mapt.mat')
+obstX = mapt(:,1);
+obstY = mapt(:,2);
+% obstX = [16, 4,  5, 8, 16,  5, 14, 10, 10, 18, 10, 10, 10];
+% obstY = [ 8, 3, 10, 4,  3, 18, 14, 8,  12, 18, 17, 11, 6]; 
 % obstX = [16, 4,  5, 8, 16,  5];
 % obstY = [ 8, 3, 10, 4,  3, 18]; 
 
@@ -58,7 +61,7 @@ obstY = [ 8, 3, 10, 4,  3, 18, 14, 8,  12, 18, 17, 11, 6];
 %   generated waypoints
 [vx, vy] = Voronoi(obstX, obstY);   % Calculate voronoi
 % axis([-110 41 -70 41])
-axis([-1 21 -1 21])
+axis([-1 31 -1 61])
 
 %% Concatenate vx and vy
 for i = 1:1:numel(vx)
@@ -69,49 +72,48 @@ x = vxf;
 y = vyf;
 
 %% Trim points to be within the valid space
-for i = 1:2:numel(x)    % Loop over number of lines
-    % case 9: both out of bounds
-    if (x(i) < 0) || (x(i) > sizex)
-        if (x(i+1) < 0) || (x(i+1) > sizex) 
-            if (y(i) < 0) || (y(i) > sizey)
-                if (y(i+1) < 0) || (y(i+1) > sizey)
-            % erase neighbors of 1st point, path is invalid
-%             neighbor(i,2) == 0;
-%             neighbor(i,3) == 0;
-%             neighbor(i,4) == 0;
-            % erase neighbors of 2nd point
-%             neighbor(i+1,2) == 0;
-%             neighbor(i+1,3) == 0;
-%             neighbor(i+1,4) == 0;
-            % Delete nodes
-            disp('i')
-            xplot = [x(i+1), x(i)];
-            yplot = [y(i+1), y(i)];
-            plot(xplot, yplot, '-.w')
-            x(i) = 0;
-            x(i+1) = 0;
-            y(i) = 0;
-            y(i+1) = 0;
-            x = [x(1:(i-1)),x((i+1):end)];
-            y = [y(1:(i-1)),y((i+1):end)];
-                end
-            end
-        end
-    else
-        disp('wo')
-    end
-
-    % case 1: x < 0
-%     elseif (x(i) < 0) || (x(i) > sizex)
-%         m = (y(i+1) - y(i)) / (x(i+1) - x(i));
-%         for i = x(i):.5:x(i+1)
-%             xnew = (y(i+1) - y(i))/m - x(i+2);
-%             if (xnew > 0) && (xnew < sizex)
-%                 break
+% for i = 1:2:numel(x)    % Loop over number of lines
+%     % case 9: both out of bounds
+%     if (x(i) < 0) || (x(i) > sizex)
+%         if (x(i+1) < 0) || (x(i+1) > sizex) 
+%             if (y(i) < 0) || (y(i) > sizey)
+%                 if (y(i+1) < 0) || (y(i+1) > sizey)
+%             % erase neighbors of 1st point, path is invalid
+% %             neighbor(i,2) == 0;
+% %             neighbor(i,3) == 0;
+% %             neighbor(i,4) == 0;
+%             % erase neighbors of 2nd point
+% %             neighbor(i+1,2) == 0;
+% %             neighbor(i+1,3) == 0;
+% %             neighbor(i+1,4) == 0;
+%             % Delete nodes
+%             disp('i')
+%             xplot = [x(i+1), x(i)];
+%             yplot = [y(i+1), y(i)];
+%             plot(xplot, yplot, '-.w')
+%             x(i) = 0;
+%             x(i+1) = 0;
+%             y(i) = 0;
+%             y(i+1) = 0;
+%             x = [x(1:(i-1)),x((i+1):end)];
+%             y = [y(1:(i-1)),y((i+1):end)];
+%                 end
 %             end
 %         end
-end
-
+%     else
+%         disp('wo')
+%     end
+% 
+%     % case 1: x < 0
+% %     elseif (x(i) < 0) || (x(i) > sizex)
+% %         m = (y(i+1) - y(i)) / (x(i+1) - x(i));
+% %         for i = x(i):.5:x(i+1)
+% %             xnew = (y(i+1) - y(i))/m - x(i+2);
+% %             if (xnew > 0) && (xnew < sizex)
+% %                 break
+% %             end
+% %         end
+% end
 
 %% Calculate neighbors
 numel(x);
@@ -168,26 +170,45 @@ for i = 1:2:numel(x)    % Loop over number of lines
         angle = acosd((d12^2+d13^2-d23^2)/(2*d12*d13));
         
         if (d <= margin) && (angle <= 90)      % if obstacle is too close to path
-            for k = 1:1:3
+            % -------------------------------------------------------------
+            % Eliminate connection between path that has been found to be
+            % too close to an obstacle
+            for k = 1:1:3 
                 if neighbor(i,k) == i+1     % find neighbor of ith node that is i+1 and delete that connection
-                    neighbor(i,k) == 0;
-                    
+                    neighbor(i,k) = 0;                    
                     % visualization aids ---------
                     plot(obstX(j),obstY(j),'or')    % Plot encroaching obstaculo
                     xth = (x2-x1)/2 + min(x2,x1);
                     yth = (y2-y1)/2 + min(y2,y1);
                     xths = [xth obstX(j)];
                     yths = [yth obstY(j)];
-                    plot(xths,yths,'-.g')
+                    %plot(xths,yths,'--g')
                     xx = [x1 x2];
                     yy = [y1 y2];
-                    plot(xx, yy,'--w')
+                    plot(xx, yy,'w')
                     % ----------------------------
-                end
+                end     
                 if neighbor(i+1,k) == i     % find neighbor of i+1 node that is ith and delete that connection
-                    neighbor(i+1,k) == 0    
+                    neighbor(i+1,k) = 0;    
                 end
             end
+            % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            
+            % -------------------------------------------------------------
+            % Check all other sister nodes and eliminate their connections
+            % through the path that has been deemed unpassable
+            for l = 1:1:numel(x)
+                if (x(l) == x(i))
+                    l;
+                    i;
+                  for k = 1:1:3
+                      if neighbor(l,k) == i+1
+                          neighbor(l,k) = 0;
+                      end
+                  end
+                end
+            end
+            % ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         end
     end
 end
@@ -195,11 +216,7 @@ end
                     
 
 %% Publish values
-
 save('space.mat');
-% save('spaceVec.mat','spaceVec','spaceVecX','spaceVecY');
-% save('xy.mat','x','y');
-% save('obstacles.mat','obstX','obstY');
 end
 
 
