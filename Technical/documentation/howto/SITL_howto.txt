@@ -1,0 +1,89 @@
+SITL Insitlation:
+0. Make a dummy SITL Dev directory
+
+$ mkdir SITL_Dev
+$ cd SITL_DEV/
+
+1. Do the pre-req's:
+
+http://dev.px4.io/starting-installing-linux.html
+
+2. Clone the firmware:
+
+$ git clone https://github.com/PX4/Firmware
+
+3. Make sure Gazebo-6 is installed:
+
+$ sudo apt-get install ros-indigo-gazebo6-ros-pkgs
+
+Running the SITL:
+
+1. Run the following command:
+
+make posix_sitl_default gazebo
+
+2. You should see a gazebo screen and the nuttx shell for accessing the px4 simulation 
+
+Running MAVROS:
+
+1. You need to connect to the udp port being published by the simulator:
+
+$ roslaunch mavros px4.launch fcu_url:="udp://:14550@127.0.0.1:14557"
+
+The first number is the udp port you want to create and use (14550) the second is the local ip address (127.0.0.1) the third
+is the udp socket the simulator will publish on (14557). 
+
+2. When mavros starts you SHOULD see a yellow warning about clock skew in the status messages
+if you don't see this you aren't connected properly. This is probably because you're on the wrong udp port in. 
+To fix this try the following :
+
+1. Use pore 14540 instead. Did this fix it? Great skip to launching our code. No? Go to debug setp 2
+2. Launch qrground station and in the connection drop down menu select local udp or simulated px4 udp or local 
+connection instead of ttyACM0. If this connects to the simulated pixhawk go to edit connections and look at what 
+port worked for them. Disconnect and use that udp port as the first number up above. 
+
+Running Our Code:
+1. Start by git cloning the following :
+
+git clone https://bitbucket.org/cuflynet/odroid_ros_runs
+
+2. Set up a catkin workspace in the SITL_DEV/ directory. You can look at odroid_ros_runs/workspace_gen.sh 
+for an example of how to do this.  
+
+3. from the catkin_ws run:
+
+$ cp -r ../odroid_ros_runs/traj_gen_node src/
+$ cp -r ../odroid_ros_runs/wp_to_mavros src/
+$ cd src/traj_gen_node
+$ mkdir include/
+
+then edit catkin_ws/src/wp_to_mavros/src/wp_2_mav_node.cpp
+
+at line 151-154 change:
+
+	if ((offboard_mode_eq!=0)&(manual_mode_eq!=0)&(!px4_state.armed)){
+		mavros_set_mode_client.call(set_mode);
+  		mavros_arm_client.call(px4_arm);
+	}
+	
+to:
+
+	if (offboard_mode_eq!=0){
+		mavros_set_mode_client.call(set_mode);
+	}
+
+then you can run a catkin_make in catkin_ws.
+
+Running our Code continued. 
+1. Go into the nuttx shell and run:
+>commander arm 
+
+2. If you haven't yet run the mavros command to start that 
+
+3. Then run from catkin_ws:
+
+$ roslaunch traj_gen_node traj_gen.launch
+$ roslaunch wp_to_mavros wp_gen.launch
+
+4. That should be it! 
+
