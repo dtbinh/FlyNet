@@ -90,8 +90,8 @@ propgd.Iy = propgd.m/12*(propgd.a^2+propgd.L^2);
 propgd.Iz = propgd.m/12*(propgd.a^2+propgd.L^2);
 
 %% Total MOI using Parrallel Axis Thereom
-TermMOI.Ix = arm.num*(arm.Ix+arm.m*arm.rx^2)+batt.num*(batt.Ix+batt.m*batt.rx^2)+centbod.num*(centbod.Ix+centbod.m*centbod.rx^2)+guid.num*(guid.Ix+guid.m*guid.rx^2)+motor.num*(motor.Ix+motor.m*motor.rx^2)+propgd.num*(propgd.Ix+propgd.m*propgd.rx^2);
-TermMOI.Iy = arm.num*(arm.Iy+arm.m*arm.ry^2)+batt.num*(batt.Iy+batt.m*batt.ry^2)+centbod.num*(centbod.Iy+centbod.m*centbod.ry^2)+guid.num*(guid.Iy+guid.m*guid.ry^2)+motor.num*(motor.Iy+motor.m*motor.ry^2)+propgd.num*(propgd.Iy+propgd.m*propgd.ry^2);
-TermMOI.Iz = arm.num*(arm.Iz+arm.m*arm.rz^2)+batt.num*(batt.Iz+batt.m*batt.rz^2)+centbod.num*(centbod.Iz+centbod.m*centbod.rz^2)+guid.num*(guid.Iz+guid.m*guid.rz^2)+motor.num*(motor.Iz+motor.m*motor.rz^2)+propgd.num*(propgd.Iz+propgd.m*propgd.rz^2);
+TermMOI.Ix = arm.num*(arm.Ix+arm.m*arm.rx^2)+batt.num*(batt.Ix+batt.m*batt.rx^2)+centbod.num*(centbod.Ix+centbod.m*centbod.rx^2)+guid.num*(guid.Ix+guid.m*guid.rx^2)+motor.num*(motor.Ix+motor.m*motor.rx^2); %+propgd.num*(propgd.Ix+propgd.m*propgd.rx^2);
+TermMOI.Iy = arm.num*(arm.Iy+arm.m*arm.ry^2)+batt.num*(batt.Iy+batt.m*batt.ry^2)+centbod.num*(centbod.Iy+centbod.m*centbod.ry^2)+guid.num*(guid.Iy+guid.m*guid.ry^2)+motor.num*(motor.Iy+motor.m*motor.ry^2); %+propgd.num*(propgd.Iy+propgd.m*propgd.ry^2);
+TermMOI.Iz = arm.num*(arm.Iz+arm.m*arm.rz^2)+batt.num*(batt.Iz+batt.m*batt.rz^2)+centbod.num*(centbod.Iz+centbod.m*centbod.rz^2)+guid.num*(guid.Iz+guid.m*guid.rz^2)+motor.num*(motor.Iz+motor.m*motor.rz^2); %+propgd.num*(propgd.Iz+propgd.m*propgd.rz^2);
 
 TermMOI
